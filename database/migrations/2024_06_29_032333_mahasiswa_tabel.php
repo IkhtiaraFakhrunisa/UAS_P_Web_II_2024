@@ -8,17 +8,12 @@ class MahasiswaTabel extends Migration
 {
     public function up()
     {
-        Schema::create('mahasiswa', function (Blueprint $table) {
+        Schema::create('mahasiswas', function (Blueprint $table) {
             $table->increments('id_mahasiswa');
             $table->string('nama_lengkap');
             $table->string('nim');
             $table->string('no_telpon');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->string('prodi');
-            $table->string('angkatan');
             $table->string('email')->unique();
-            $table->string('masuk_sebagai');
             $table->string('password');
             $table->timestamps();
         });
@@ -26,6 +21,7 @@ class MahasiswaTabel extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('mahasiswa');
+        Schema::dropIfExists('mahasiswas');
     }
-};
+}
+;

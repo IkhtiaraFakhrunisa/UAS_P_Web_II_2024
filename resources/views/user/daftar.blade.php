@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{ URL('storage/images/ULM.png') }}" type="image/x-icon">
-    <title>Halaman Login</title>
+    <title>Halaman Daftar</title>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,7 @@
 
         body {
             display: flex;
-            height: 190vh;
+            height: 270vh;
         }
 
         aside {
@@ -86,12 +86,24 @@
             font-size: 1.1rem
         }
 
+        footer .btn {
+            background-color: #0EA5E9;
+            border: none;
+            padding: 15px 46%;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            color: white;
+            margin-top: 25px;
+        }
+
         span {
             color: red;
         }
 
-        .username,
+        .nama,
+        .nim,
         .password,
+        .konfirmasi_password,
         .handphone,
         .email,
         .sebagai {
@@ -100,20 +112,24 @@
             margin-bottom: 20px;
         }
 
-        .username label,
+        .nama label,
+        .nim label,
         .password label,
         .handphone label,
         .email label,
+        .konfirmasi_password label,
         .sebagai label {
             margin-bottom: 10px;
             font-weight: 600;
             font-size: 1.1rem;
         }
 
-        .username input,
+        .nama input,
+        .nim input,
         .password input,
         .handphone input,
         .email input,
+        .konfirmasi_password input,
         .sebagai select,
         option {
             border: 2px #E2E8F0 solid;
@@ -135,32 +151,23 @@
             color: #E2E8F0;
         }
 
-        .username input::placeholder,
+        .nama input::placeholder,
+        .nim input::placeholder,
         .password input::placeholder,
         .handphone input::placeholder,
+        .konfirmasi_password input::placeholder,
         .email input::placeholder {
             color: #E2E8F0;
         }
 
-        .password a {
+        .konfirmasi_password a {
             text-align: right;
             font-size: 1.1rem;
             color: #8592A4;
             margin-top: 10px;
         }
 
-        button {
-            background-color: #0EA5E9;
-            border: none;
-            width: 100%;
-            height: 60px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            color: white;
-            margin-top: 25px;
-        }
-
-        button:hover {
+        footer .btn:hover {
             background-color: #0284C7
         }
 
@@ -174,6 +181,16 @@
         footer a {
             color: #000;
             font-weight: 600;
+        }
+
+        .alert {
+            width: 500px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 20px 50px;
+            background-color: #ffc1c1;
+            color: red;
+            border: 2px red solid;
         }
     </style>
 </head>
@@ -191,26 +208,36 @@
                     <p>Universitas Lambung Mangkurat</p>
                 </div>
             </div>
-            <form action="" method="POST">
+            <form action="{{ route('daftar.aksi') }}" method="POST">
+                @csrf
                 <header>
                     <p>Buat Sebuah Akun</p>
                     <p>Isi data diri dengan benar!</p>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $err)
+                            <p class="alert">{{ $err }}</p>
+                        @endforeach
+                    @endif
                 </header>
-                <div class="username">
-                    <label for="username">Username <span>*</span></label>
-                    <input type="text" name="username" id="username" placeholder="Masukkan Username">
+                <div class="nama">
+                    <label for="nama">Nama Lengkap <span>*</span></label>
+                    <input type="text" name="nama_lengkap" id="nama" placeholder="Masukkan Nama Lengkap">
+                </div>
+                <div class="nim">
+                    <label for="nim">NIM <span>*</span></label>
+                    <input type="text" name="nim" id="nim" placeholder="Masukkan NIM">
                 </div>
                 <div class="handphone">
                     <label for="handphone">No. Handphone <span>*</span></label>
-                    <input type="text" name="handphone" id="handphone" placeholder="Masukkan No. Handphone">
+                    <input type="text" name="no_telpon" id="handphone" placeholder="Masukkan No. Handphone">
                 </div>
                 <div class="email">
                     <label for="email">Email <span>*</span></label>
                     <input type="email" name="email" id="email" placeholder="Masukkan Email">
                 </div>
                 <div class="sebagai">
-                    <label for="sebagai">Username <span>*</span></label>
-                    <select name="sebagai" id="sebagai">
+                    <label for="sebagai">Masuk Sebagai <span>*</span></label>
+                    <select id="sebagai">
                         <option style="color: #ddd" value="" selected disabled hidden>Pilih Jenis Pengguna
                         </option>
                         <option value="mahasiswa">Mahasiswa</option>
@@ -219,12 +246,17 @@
                 </div>
                 <div class="password">
                     <label for="password">Password <span>*</span></label>
-                    <input type="text" name="password" id="password" placeholder="Masukkan Password">
+                    <input type="password" name="password" id="password" placeholder="Masukkan Password">
+                </div>
+                <div class="konfirmasi_password">
+                    <label for="konfirmasi_password">Konfirmasi Password <span>*</span></label>
+                    <input type="password" name="konfirmasi_password" id="konfirmasi_password"
+                        placeholder="Masukkan Konfirmasi Password">
                     <a href="">Lupa password?</a>
                 </div>
                 <footer>
-                    <button type="submit">Daftar</button>
-                    <p>Sudah Mempunyai Akun? <a href="{{ route('/') }}">Login</a></p>
+                    <button class="btn" type="submit">Daftar</button>
+                    <p>Sudah Mempunyai Akun? <a href="{{ route('login') }}">Login</a></p>
                 </footer>
             </form>
         </div>

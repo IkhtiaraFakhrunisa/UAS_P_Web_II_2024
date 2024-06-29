@@ -8,19 +8,23 @@ class PengajuanTabel extends Migration
 {
     public function up()
     {
-        Schema::create('pengajuan', function (Blueprint $table) {
+        Schema::create('pengajuans', function (Blueprint $table) {
             $table->increments('id_pengajuan');
             $table->string('jenis_pengajuan');
-            $table->date('tanggal_pengajuan');
-            $table->string('status');
+            $table->string('prodi');
+            $table->string('semester');
+            $table->string('tahun_akademik');
+            $table->string('keperluan');
+            $table->string('alasan');
             $table->unsignedInteger('mahasiswa_id');
-            $table->foreign('mahasiswa_id')->references('id_mahasiswa')->on('mahasiswa')->onDelete('cascade');
+            $table->foreign('mahasiswa_id')->references('id_mahasiswa')->on('mahasiswas')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('pengajuan');
+        Schema::dropIfExists('pengajuans');
     }
-};
+}
+;

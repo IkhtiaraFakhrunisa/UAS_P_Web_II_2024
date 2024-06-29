@@ -13,13 +13,16 @@ class Pengajuan extends Model
 
     protected $fillable = [
         'jenis_pengajuan',
-        'tanggal_pengajuan',
-        'status',
+        'prodi',
+        'semester',
+        'tahun_akademik',
+        'keperluan',
+        'alasan',
         'mahasiswa_id',
     ];
 
     public function mahasiswa()
     {
-        return $this->hasOne(Mahasiswa::class, 'mahasiswa_id', 'id_mahasiswa');
+        return $this->hasMany(Mahasiswa::class, 'mahasiswa_id', 'id_mahasiswa');
     }
 }

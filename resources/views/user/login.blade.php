@@ -128,18 +128,19 @@
             margin-top: 10px;
         }
 
-        button {
+        footer .btn {
+            display: block;
+            font-weight: normal;
             background-color: #0EA5E9;
             border: none;
-            width: 100%;
-            height: 60px;
+            padding: 15px 46%;
             border-radius: 10px;
             font-size: 1.1rem;
             color: white;
             margin-top: 25px;
         }
 
-        button:hover {
+        footer .btn:hover {
             background-color: #0284C7
         }
 
@@ -153,6 +154,16 @@
         footer a {
             color: #000;
             font-weight: 600;
+        }
+
+        .alert {
+            width: 500px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 20px 50px;
+            background-color: #ffc1c1;
+            color: red;
+            border: 2px red solid;
         }
     </style>
 </head>
@@ -170,14 +181,20 @@
                     <p>Universitas Lambung Mangkurat</p>
                 </div>
             </div>
-            <form action="{{ route('/dashboard') }}" method="POST">
+            <form action="{{ route('login.aksi') }}" method="POST">
+                @csrf
                 <header>
                     <p>Login ke Akun Anda</p>
                     <p>Masukkan Username dan Password untuk login!</p>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $err)
+                            <p class="alert">{{ $err }}</p>
+                        @endforeach
+                    @endif
                 </header>
                 <div class="username">
                     <label for="username">Username <span>*</span></label>
-                    <input type="text" name="username" id="username" placeholder="Masukkan Username">
+                    <input type="text" name="nim" id="username" placeholder="Masukkan Username">
                 </div>
                 <div class="password">
                     <label for="password">Password <span>*</span></label>
@@ -185,8 +202,8 @@
                     <a href="">Lupa password?</a>
                 </div>
                 <footer>
-                    <button type="submit">Login</button>
-                    <p>Belum Mempunyai Akun? <a href="{{ route('/daftar') }}">Daftar</a></p>
+                    <button class="btn" type="submit">Login</button>
+                    <p>Belum Mempunyai Akun? <a href="{{ route('daftar') }}">Daftar</a></p>
                 </footer>
             </form>
         </div>

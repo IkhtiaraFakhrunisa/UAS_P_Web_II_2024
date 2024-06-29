@@ -4,25 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Mahasiswa extends Model
+class Mahasiswa extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $primaryKey = 'id_mahasiswa';
+
+    protected $guard = 'mahasiswa';
 
     protected $fillable = [
         'nama_lengkap',
         'nim',
         'no_telpon',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'prodi',
-        'angkatan',
         'email',
-        'masuk_sebagai',
         'password',
-        
     ];
 
     public function pengajuan()
