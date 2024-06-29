@@ -66,4 +66,3 @@ class MahasiswaController extends Controller
         return redirect('login');
     }
 }
-

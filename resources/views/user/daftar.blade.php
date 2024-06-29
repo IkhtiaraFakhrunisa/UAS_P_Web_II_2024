@@ -252,7 +252,6 @@
                     <label for="konfirmasi_password">Konfirmasi Password <span>*</span></label>
                     <input type="password" name="konfirmasi_password" id="konfirmasi_password"
                         placeholder="Masukkan Konfirmasi Password">
-                    <a href="">Lupa password?</a>
                 </div>
                 <footer>
                     <button class="btn" type="submit">Daftar</button>
